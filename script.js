@@ -39,7 +39,7 @@ const RoboDB = (() => {
 })();
 
 const ADMIN_USER = 'gtec', ADMIN_PASS = 'gtec123';
-const SERVER_URL  = 'http://localhost:8000'; // ← change to your deployed server URL
+const SERVER_URL = 'https://infinexchat.onrender.com';// ← change to your deployed server URL
 
 const SESSION_ID   = 'user_' + Math.random().toString(36).slice(2, 9);
 const SESSION_NAME = 'Guest ' + SESSION_ID.slice(5, 10).toUpperCase();
