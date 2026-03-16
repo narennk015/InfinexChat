@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<title>InfinexChatBox</title>
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="logo-3d">
+      <div class="logo-cube">
+        <div class="lc-face lc-f">💬</div>
+        <div class="lc-face lc-b">⚡</div>
+        <div class="lc-face lc-l">🌊</div>
+        <div class="lc-face lc-r">❄️</div>
+        <div class="lc-face lc-t">💡</div>
+        <div class="lc-face lc-d">🔵</div>
+      </div>
+    </div>
+    <h3>infinex chat</h3>
+  </div>
+
+  <div class="nav-right">
+    <span id="serverBadge" class="srv-badge off"><span class="srv-dot"></span></span>
+
+    <!-- Voice assistant selector -->
+    <div class="voice-selector-wrap" id="voiceSelectorWrap">
+      <button class="voice-select-btn" id="voiceSelectBtn" onclick="toggleVoiceDropdown()">
+        🔊 <span id="voiceBtnLabel">Voice: Off</span> ▾
+      </button>
+      <div class="voice-dropdown" id="voiceDropdown">
+        <div class="vd-label">Voice Assistant</div>
+        <div class="vd-off selected" id="vd-off" onclick="selectVoice(null)">
+          🔇 <span>Off</span>
+        </div>
+        <div class="vd-divider"></div>
+        <div class="vd-label">Available Voices</div>
+        <div id="voiceList">
+          <div style="padding:8px 10px;font-size:12px;color:var(--text3);">Loading voices…</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    <button class="nav-btn" id="micBtn" onclick="toggleMic()">🎙️ Mic</button>
+    <button class="nav-btn" onclick="openLogin()">⚙️ Admin</button>
+    <!-- Desktop ↔ Mobile view toggle -->
+    <button class="viewport-btn" id="viewportBtn" onclick="toggleViewport()" title="Switch view">
+      <svg id="viewportIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+      </svg>
+      <span id="viewportLabel">Mobile view</span>
+    </button>
+  </div>
+</nav>
+
+<!-- PHONE FRAME (mobile view simulation) -->
+<div class="phone-frame" id="phoneFrame">
+  <div class="phone-nav">
+    <div class="phone-logo">
+      <div class="phone-logo-3d">
+        <div class="phone-logo-cube">
+          <div class="plc-face plc-f">💬</div>
+          <div class="plc-face plc-b">✦</div>
+          <div class="plc-face plc-l">🌊</div>
+          <div class="plc-face plc-r">❄️</div>
+          <div class="plc-face plc-t">💡</div>
+          <div class="plc-face plc-d">🔵</div>
+        </div>
+      </div>
+      infinex chat
+    </div>
+    <div class="phone-nav-right">
+      <button class="phone-icon-btn" id="phoneMicBtn" onclick="togglePhoneMic()" title="Voice">🎙️</button>
+      <button class="phone-icon-btn" id="phoneThemeBtn" onclick="toggleTheme(); updatePhoneTheme();" title="Theme">🌙</button>
+    </div>
+  </div>
+  <div class="phone-body" id="phoneBody">
+    <!-- messages appear here -->
+    <div style="text-align:center;padding:20px 10px;">
+      <div style="font-size:32px;margin-bottom:10px;">🤖</div>
+      <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:5px;">infinex chat</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6;">Phone preview — messages from the main chat appear here in real time.</div>
+    </div>
+  </div>
+  <div class="phone-input-section">
+    <div class="phone-input-bar">
+      <input id="phoneInput" type="text" placeholder="Message…" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="phone-mic-btn" id="phoneMicBtn2" onclick="togglePhoneMic()">🎙️</button>
+      <button class="phone-send-btn" onclick="sendPhoneMsg()">➤</button>
+    </div>
+  </div>
+</div>
+<button class="exit-mobile-btn" onclick="toggleViewport()">← Exit Mobile View</button>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="chat-body" id="chatBody">
+    <div class="welcome" id="welcomeBanner">
+      <div class="orb-scene">
+        <div class="orb-glow"></div>
+        <div class="orb-glow-2"></div>
+        <div class="orb-ring">
+          <div class="orb-face orb-face-1"></div>
+          <div class="orb-face orb-face-2"></div>
+          <div class="orb-face orb-face-3"></div>
+          <div class="orb-face orb-face-4"></div>
+          <div class="orb-face orb-face-5"></div>
+          <div class="orb-face orb-face-6"></div>
+          <div class="orb-face orb-face-7"></div>
+          <div class="orb-face orb-face-8"></div>
+        </div>
+        <div class="orb-icon">💬</div>
+        <div class="particle p1"></div>
+        <div class="particle p2"></div>
+        <div class="particle p3"></div>
+        <div class="particle p4"></div>
+        <div class="particle p5"></div>
+      </div>
+      <h1 class="welcome-title">Chat with Infinex chatbox</h1>
+      <p class="welcome-sub">Connected to a live server — ask about time, date, facts and more. Tap a suggestion or type your message.</p>
+      <div class="suggestions-box">
+        <div class="suggestions-label">Prompt Suggestions For You</div>
+        <div class="chips-grid">
+          <span class="chip" onclick="sendQuick('Tell about infinex?')">✦ Tell about infinex?</span>
+          <span class="chip" onclick="sendQuick('Which college is organizing INFINEX 26?')">✦ Which college is organizing INFINEX'26?</span>
+          <span class="chip" onclick="sendQuick('Which department is hosting this symposium?')">✦Which department is hosting this symposium?</span>
+          <span class="chip" onclick="sendQuick('What are Technical Events & Competitions?')">✦ What are Technical Events & Competitions?</span>
+          <span class="chip" onclick="sendQuick('What can you help me with?')">✦ What can you do?</span>
+          <span class="chip" onclick="sendQuick('What are Technical Events & Competitions?')">✦ What are Technical Events & Competitions?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-section">
+    <div class="mic-banner" id="micBanner">🔴 Listening… speak now</div>
+    <div class="input-bar">
+      <input id="userInput" type="text" placeholder="Ask our chatbot for the content you require" autocomplete="off" autocorrect="off" spellcheck="false">
+      <div class="inp-divider"></div>
+      <button class="inp-btn inp-btn-ghost" id="micBtn2" onclick="toggleMic()">🎙️ Voice</button>
+      <button class="inp-btn inp-btn-send" onclick="sendMsg()">Send ➤</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN OVERLAY -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <div class="login-cube-wrap">
+      <div class="login-cube">
+        <div class="lc2-face lc2-f">🔐</div>
+        <div class="lc2-face lc2-b">🛡️</div>
+        <div class="lc2-face lc2-l">⚙️</div>
+        <div class="lc2-face lc2-r">📋</div>
+      </div>
+    </div>
+    <div>
+      <div class="login-title">Admin login</div>
+      <div class="login-sub">Access the conversation dashboard.</div>
+    </div>
+    <div class="lf"><label>Username</label><input id="loginUser" type="text" placeholder="admin" autocomplete="off"></div>
+    <div class="lf"><label>Password</label><input id="loginPass" type="password" placeholder="••••••••"></div>
+    <div id="loginErr" class="login-err">⚠ Incorrect credentials.</div>
+    <button class="login-btn" onclick="doLogin()">Sign in</button>
+    <button class="login-cancel" onclick="closeLogin()">Cancel</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

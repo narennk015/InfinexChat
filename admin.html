@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infinex — Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ═══════════ LOGIN GATE ═══════════ -->
+<div id="loginGate">
+  <div class="login-card">
+    <div class="login-cube-wrap">
+      <div class="login-cube">
+        <div class="lc-face lc-f">🔐</div>
+        <div class="lc-face lc-b">🛡️</div>
+        <div class="lc-face lc-l">⚙️</div>
+        <div class="lc-face lc-r">📋</div>
+      </div>
+    </div>
+    <div>
+      <div class="login-title">Admin Panel</div>
+      <div class="login-sub">Sign in to manage conversations and reply to users.</div>
+    </div>
+    <div class="lf"><label>Username</label><input id="lgUser" type="text" placeholder="admin" autocomplete="off"></div>
+    <div class="lf"><label>Password</label><input id="lgPass" type="password" placeholder="••••••••"></div>
+    <div id="lgErr" class="login-err">⚠ Incorrect credentials, please try again.</div>
+    <button class="login-btn" onclick="doLogin()">Sign in</button>
+  </div>
+</div>
+
+<!-- ═══════════ ADMIN APP ═══════════ -->
+<div id="adminApp">
+
+  <!-- TOP NAV -->
+  <nav class="admin-nav">
+    <div class="nav-brand">
+      <button class="nav-btn mob-menu" onclick="openDrawer()" style="padding:0 10px;font-size:16px;">☰</button>
+      <div class="nav-logo-3d">
+        <div class="nav-cube">
+          <div class="nc-face nc-f">💬</div>
+          <div class="nc-face nc-b">✦</div>
+          <div class="nc-face nc-l">🌊</div>
+          <div class="nc-face nc-r">❄️</div>
+          <div class="nc-face nc-t">💡</div>
+          <div class="nc-face nc-d">🔵</div>
+        </div>
+      </div>
+      <span class="brand-name">InfinexChat</span>
+      <span class="admin-tag">Admin Panel</span>
+    </div>
+
+    <div class="live-clock">
+      <div class="clk-dot"></div>
+      <span id="liveClock">--:--:--</span>
+      <span id="liveDate" style="font-size:10px;color:var(--text3);margin-left:4px;"></span>
+    </div>
+
+    <div class="nav-right">
+      <!-- Voice selector -->
+      <div class="voice-selector-wrap" id="admVoiceSelectorWrap">
+        <button class="voice-select-btn" id="admVoiceBtn" onclick="toggleAdmVoiceDD()">
+          🔊 <span id="admVoiceBtnLabel">Voice: Off</span> ▾
+        </button>
+        <div class="voice-dropdown" id="admVoiceDD">
+          <div class="vd-label">Voice Assistant</div>
+          <div class="vd-off selected" id="adm-vd-off" onclick="selectAdmVoice(null)">🔇 <span>Off</span></div>
+          <div class="vd-divider"></div>
+          <div class="vd-label">Available Voices</div>
+          <div id="admVoiceList"><div style="padding:8px 10px;font-size:12px;color:var(--text3);">Loading…</div></div>
+        </div>
+      </div>
+
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">🌙</button>
+      <!-- Viewport toggle -->
+      <button class="viewport-btn" id="admViewportBtn" onclick="toggleAdmViewport()" title="Switch view">
+        <svg id="admViewportIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0">
+          <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/>
+        </svg>
+        <span id="admViewportLabel">Mobile view</span>
+      </button>
+      <!-- DB Panel -->
+      <button class="viewport-btn" onclick="openDBPanel()" title="Database">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+        <span>Database</span>
+      </button>
+      <button class="nav-btn danger" onclick="exitToChat()">← Back to Chat</button>
+    </div>
+  </nav>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="convSidebar">
+      <div class="sb-header">
+        <span class="sb-title">Conversations</span>
+        <span class="conv-badge" id="convBadge">0</span>
+      </div>
+
+      <!-- stats -->
+      <div class="sb-stats">
+        <div class="sb-stat">
+          <div class="sb-stat-val" id="statTotal">0</div>
+          <div class="sb-stat-lbl">Total</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-stat-val" id="statUnread">0</div>
+          <div class="sb-stat-lbl">Unread</div>
+        </div>
+        <div class="sb-stat">
+          <div class="sb-stat-val" id="statMsgs">0</div>
+          <div class="sb-stat-lbl">Messages</div>
+        </div>
+      </div>
+
+      <div class="sb-search">
+        <input id="searchInp" placeholder="Search conversations…" oninput="renderConvList()">
+      </div>
+      <div class="conv-list" id="convList">
+        <div class="no-conv">No conversations yet.<br>Waiting for users… 👀</div>
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+
+      <!-- empty state -->
+      <div class="empty-state" id="emptyState">
+        <div class="empty-orb-scene">
+          <div class="empty-orb-ring">
+            <div class="empty-orb-face empty-orb-face-1"></div>
+            <div class="empty-orb-face empty-orb-face-2"></div>
+            <div class="empty-orb-face empty-orb-face-3"></div>
+            <div class="empty-orb-face empty-orb-face-4"></div>
+          </div>
+          <div class="empty-orb-icon">💬</div>
+        </div>
+        <div class="empty-title">No conversation selected</div>
+        <div class="empty-sub">Pick a conversation from the sidebar to view messages and send a reply.</div>
+      </div>
+
+      <!-- conversation view -->
+      <div class="conv-view" id="convView">
+
+        <div class="conv-header">
+          <div class="cv-user">
+            <div class="cv-av">🧑</div>
+            <div>
+              <div class="cv-name" id="cvName">—</div>
+              <div class="cv-sub"  id="cvSub">—</div>
+              <div class="cv-device" id="cvDevice"></div>
+            </div>
+          </div>
+          <div class="conv-actions">
+            <button class="action-btn" onclick="exportConv()">⬇ Export</button>
+            <button class="action-btn del-btn" onclick="deleteConv()">🗑 Delete</button>
+          </div>
+        </div>
+
+        <div class="adm-body" id="admBody"></div>
+
+        <div class="reply-section">
+          <div class="chip-row" id="chipList"></div>
+          <div class="reply-bar">
+            <textarea id="adminReply" placeholder="Type your reply to the user…" rows="1"></textarea>
+            <div class="reply-actions">
+              <button class="reply-btn reply-btn-ghost" onclick="openSRManager()">⚡ Presets</button>
+              <button class="reply-btn reply-btn-send" onclick="sendReply()">Send ➤</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SR OVERLAY -->
+<div class="overlay" id="srOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Response Presets</div>
+      <button class="modal-close" onclick="closeSRManager()">✕</button>
+    </div>
+    <div class="sr-add">
+      <input id="srKw" placeholder="keyword" autocomplete="off">
+      <textarea id="srTx" placeholder="response text…"></textarea>
+      <button class="sr-save-btn" onclick="addSR()">Save</button>
+    </div>
+    <div class="sr-list" id="srList"></div>
+  </div>
+</div>
+
+<div class="drawer-back" id="drawerBack" onclick="closeDrawer()"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════ DATABASE PANEL ═══════════ -->
+<div class="overlay" id="dbPanel">
+  <div class="modal" style="width:min(700px,96vw);max-height:88vh;">
+    <div class="modal-header">
+      <div class="modal-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;vertical-align:middle;margin-right:8px">
+          <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+        </svg>
+        Chat Database
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button class="action-btn" onclick="clearAllDB()" style="border-color:rgba(239,68,68,.3);color:var(--red);">🗑 Clear All</button>
+        <button class="action-btn" onclick="exportAllDB()">⬇ Export All</button>
+        <button class="modal-close" onclick="closeDBPanel()">✕</button>
+      </div>
+    </div>
+    <!-- stats row -->
+    <div id="dbStats" style="display:flex;gap:10px;flex-wrap:wrap;"></div>
+    <!-- search -->
+    <input id="dbSearch" placeholder="Search messages…" oninput="renderDBPanel()"
+      style="background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-family:var(--font);font-size:13px;color:var(--text);outline:none;width:100%;">
+    <!-- sessions table -->
+    <div id="dbContent" style="overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:12px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ ADMIN PHONE PREVIEW ═══════════ -->
+<div class="adm-phone-frame" id="admPhoneFrame" style="display:none;">
+  <div class="adm-phone-inner">
+    <div class="adm-phone-header">
+      <div style="font-size:12px;font-weight:600;color:var(--text);">📱 User's Phone Preview</div>
+      <div id="admPhoneUser" style="font-size:10px;color:var(--text2);margin-top:1px;">Select a conversation</div>
+    </div>
+    <div class="adm-phone-body" id="admPhoneBody">
+      <div style="text-align:center;padding:20px 8px;color:var(--text3);font-size:12px;">Select a conversation to preview the user's phone view.</div>
+    </div>
+    <div class="adm-phone-input">
+      <input id="admPhoneReply" placeholder="Quick reply…" style="flex:1;border:none;background:transparent;outline:none;font-family:var(--font);font-size:12px;color:var(--text);caret-color:var(--indigo);">
+      <button onclick="sendAdmPhoneReply()" style="background:var(--indigo);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:12px;flex-shrink:0;">➤</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
