@@ -118,3 +118,5 @@ def get_reply(msg: str) -> str:
         "That's a tricky one! Try asking about **time**, **date**, or type **'help'** to see what I can do.",
     ]
     return random.choice(fallbacks)
+    if "hari" in msg:
+        return "Welcome to harii"
