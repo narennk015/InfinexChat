@@ -114,10 +114,6 @@ def get_reply(msg: str) -> str:
     # Weather (graceful not-supported)
     if "weather" in msg:
         return "🌤️ I don't have live weather data yet, but you can check **weather.com** for your location!"
-    if "  " in msg:
-        return"  "
-    if "  " in msg:
-        return"  "
 
     if "college" in msg and "infinex" in msg:
         return "Ganadipathy Tulsi's Jain Engineering College."
@@ -173,7 +169,7 @@ def get_reply(msg: str) -> str:
     elif "convener" in msg:
         return "Mrs. SI Santhanalakshmi, HOD (CSE & CS)."
 
-    elif "staff coordinator" in msg:
+    elif "staff coordinator" in msg and "staff" in msg:
         return """Mrs. S Vennila
     Mr. P Jayasooriya
     Mr. S Thirumal
