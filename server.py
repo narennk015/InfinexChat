@@ -119,7 +119,7 @@ def get_reply(msg: str) -> str:
         return "Ganadipathy Tulsi's Jain Engineering College."
 
     elif "department" in msg:
-        return "The Department of CSE / CS."
+        return "The Department of Computer Science and cyber security."
 
     elif "when" in msg and "infinex" in msg:
         return "On 18th March."
@@ -152,12 +152,12 @@ def get_reply(msg: str) -> str:
     elif "code blooded" in msg or "code-blooded" in msg:
         return "Coding and debugging competition."
 
-    elif "organizing committee" in msg:
+    elif "organizing committee" in msg or "organizing committee" in msg:
         return """Principal: D. M Barathi
         Vice Principal & HOD (IT): Prof. D Durai Kumar
         HOD (CSE & CS): Mrs. SI Santhanalakshmi"""
 
-    elif "student coordinator" in msg:
+    elif "student coordinator" in msg or "student coordinates" in msg or "student coordinates":
         return """Usharani S.
     Aravind Krishna PM
     Santhosh Kumar J
@@ -179,13 +179,13 @@ def get_reply(msg: str) -> str:
     elif "theme" in msg:
         return "The convergence of technology, innovation, and engineering excellence."
 
-    elif "aravind mani" in msg:
+    elif "aravind mani" in msg or "arvind mani" in msg:
         return "Mr. Aravindh Mani is SAP Delivery Head for APAC & Middle East at ELIXIR Global, leading SAP S/4HANA, cloud, and AI-driven transformations."
 
     elif "fun" in msg:
         return "Yes, it will be fun and exciting!"
 
-    elif "hi" in msg or "hello" in msg:
+    elif "hii" in msg or "hello" in msg:
         return "Hello! Welcome to Infinex’26 👋"
 
     elif "food" in msg:
