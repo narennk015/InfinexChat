@@ -119,54 +119,87 @@ def get_reply(msg: str) -> str:
     if "  " in msg:
         return"  "
 
-    if " Which college is organizing INFINEX'26? " in msg:
-        return"  "
+    if "college" in msg and "infinex" in msg:
+        return "Ganadipathy Tulsi's Jain Engineering College."
 
-    if "  " in msg:
-        return"  Ganadipathy Tulsi's Jain Engineering College. "
-    if " Which department is hosting this symposium? " in msg:
-        return" : The Department of CSE / CS. "
-    if "   When is INFINEX'26 taking place?" in msg:
-        return"  On 18th March. "
-    if " What time does the event start? " in msg:  
-        return"  At 9:00 AM. "
-    if "  Where will infiex'26 be held?" in msg:
-        return" At the Mahaveer Block of the college.  "
-    if " what are the Technical Events & Competitions" in msg:
-        return"⚡STYLESHEET SHOWDOWN\n ⚡WHITEAPER PROTOCOL \n CLOCK SPEED QUIZ \n ⚡ GRAPHIC GLITCHY\n ⚡CODE-BLOODED\n "
-    if "stylesheet showdown" in msg:
-        return" it's an Web development"
-    if " whitepaper protocol " in msg:
-        return"  it's a PAPER PRESENTATION "
-    if " graphic glitch " in msg:
-        return" it's a poster designing"
-    if " Clock speed" in msg:
-        return" quiz competition"
-    if "   code blooded" in msg:
-        return" codeing and debuging "
-    if " organizing committee" in msg:
-        return "Principal : D. M Barathi \n Vice Principal & HOD (IT) Professor. D Durai Kumar.\n HOD (CSE & CS)Mrs. SI Santhanalakshmi \n "
-    if "Student Co-ordinators  " in msg:
-        return" Usharani S.\n Aravind Krishna PM.\n Santhosh Kumar J.\n  Sarathy K.\n  Mohan Raj S.\n Nehanth R.\n  David Niglin S I. \n "
-    if "   Who is the Convener of INFEX'26?" in msg:
-        return" : Mrs. SI Santhanalakshmi, HOD (CSE & CS). "
-    if " staff coordinator for the event.  " in msg:
-        return" Mrs. S Vennila, \n Mr. P Jayasooriya \n, Mr. S Thirumal,\n  Mrs. M Jothika or Mrs. GV Varshini.\n "
-    if " What is the main theme of INFEX'26? " in msg:
-        return"  The convergence of technology, innovation, and engineering excellence. "
-    if " who is aravind mani " in msg:
-        return"Mr. Aravindh Mani currently serves as the SAP Delivery Head for APAC and the Middle East at ELIXIR Global- a company driving Al-powered strategy, digital transformation, and intelligent outsourcing. In this role, he leads large-scale SAP delivery programs, bridging the gap between complex legacy systems and future-ready digital enterprises.His focus is on high-impact initiatives SAP S/4HANA transitions, cloud-first strategies, and Applied Al integration with a clear mission: to move beyond go-live and deliver measurable, sustainable business outcomes."
-    if "is this event fun?" in msg:
-        return" yes, it will be fun and exciting."
-    if "hi  " in msg:
-        return" Hello! Welcome to Infinex’26 👋 "
-    if "  Will food be provided? " in msg:
-        return" Yes, food will be provided. "
-    if " Is certificate useful? " in msg:
-        return" Yes, it helps in your resume. "
+    elif "department" in msg:
+        return "The Department of CSE / CS."
 
+    elif "when" in msg and "infinex" in msg:
+        return "On 18th March."
 
+    elif "time" in msg and "start" in msg:
+        return "At 9:00 AM."
 
+    elif "where" in msg and "infinex" in msg:
+        return "At the Mahaveer Block of the college."
+
+    elif "technical events" in msg:
+        return """⚡ STYLESHEET SHOWDOWN
+        ⚡ WHITEPAPER PROTOCOL
+        ⚡ CLOCK SPEED QUIZ
+        ⚡ GRAPHIC GLITCH
+        ⚡ CODE-BLOODED"""
+
+    elif "stylesheet showdown" in msg:
+        return "It's a web development event."
+
+    elif "whitepaper protocol" in msg:
+        return "It's a paper presentation."
+
+    elif "graphic glitch" in msg:
+        return "It's a poster designing event."
+
+    elif "clock speed" in msg:
+        return "It's a quiz competition."
+
+    elif "code blooded" in msg or "code-blooded" in msg:
+        return "Coding and debugging competition."
+
+    elif "organizing committee" in msg:
+        return """Principal: D. M Barathi
+        Vice Principal & HOD (IT): Prof. D Durai Kumar
+        HOD (CSE & CS): Mrs. SI Santhanalakshmi"""
+
+    elif "student coordinator" in msg:
+        return """Usharani S.
+    Aravind Krishna PM
+    Santhosh Kumar J
+    Sarathy K
+    Mohan Raj S
+    Nehanth R
+    David Niglin S I"""
+
+    elif "convener" in msg:
+        return "Mrs. SI Santhanalakshmi, HOD (CSE & CS)."
+
+    elif "staff coordinator" in msg:
+        return """Mrs. S Vennila
+    Mr. P Jayasooriya
+    Mr. S Thirumal
+    Mrs. M Jothika
+    Mrs. GV Varshini"""
+
+    elif "theme" in msg:
+        return "The convergence of technology, innovation, and engineering excellence."
+
+    elif "aravind mani" in msg:
+        return "Mr. Aravindh Mani is SAP Delivery Head for APAC & Middle East at ELIXIR Global, leading SAP S/4HANA, cloud, and AI-driven transformations."
+
+    elif "fun" in msg:
+        return "Yes, it will be fun and exciting!"
+
+    elif "hi" in msg or "hello" in msg:
+        return "Hello! Welcome to Infinex’26 👋"
+
+    elif "food" in msg:
+        return "Yes, food will be provided."
+
+    elif "certificate" in msg:
+        return "Yes, it helps in your resume."
+
+    else:
+        return "Sorry, I didn't understand. Please ask about Infinex’26."
     # Default fallback
     fallbacks = [
         "Hmm, I'm not sure about that one 🤔 Try asking about the **time**, **date**, a **joke**, or **facts**!",
