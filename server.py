@@ -35,7 +35,7 @@ def get_reply(msg: str) -> str:
 
     # Time
     if any(w in msg for w in ["time", "what time", "current time", "clock"]):
-        return f"🕐 The current time is **{now.strftime('%I:%M:%S %p')}**."
+        return f"🕐 The current time is **{now.strftime('%h:%M:%S %p')}**."
 
     # Date
     if any(w in msg for w in ["date", "today", "what day", "day is it"]):
@@ -114,6 +114,58 @@ def get_reply(msg: str) -> str:
     # Weather (graceful not-supported)
     if "weather" in msg:
         return "🌤️ I don't have live weather data yet, but you can check **weather.com** for your location!"
+    if "  " in msg:
+        return"  "
+    if "  " in msg:
+        return"  "
+
+    if " Which college is organizing INFINEX'26? " in msg:
+        return"  "
+
+    if "  " in msg:
+        return"  Ganadipathy Tulsi's Jain Engineering College. "
+    if " Which department is hosting this symposium? " in msg:
+        return" : The Department of CSE / CS. "
+    if "   When is INFINEX'26 taking place?" in msg:
+        return"  On 18th March. "
+    if " What time does the event start? " in msg:  
+        return"  At 9:00 AM. "
+    if "  Where will infiex'26 be held?" in msg:
+        return" At the Mahaveer Block of the college.  "
+    if " what are the Technical Events & Competitions" in msg:
+        return"⚡STYLESHEET SHOWDOWN\n ⚡WHITEAPER PROTOCOL \n CLOCK SPEED QUIZ \n ⚡ GRAPHIC GLITCHY\n ⚡CODE-BLOODED\n "
+    if "stylesheet showdown" in msg:
+        return" it's an Web development"
+    if " whitepaper protocol " in msg:
+        return"  it's a PAPER PRESENTATION "
+    if " graphic glitch " in msg:
+        return" it's a poster designing"
+    if " Clock speed" in msg:
+        return" quiz competition"
+    if "   code blooded" in msg:
+        return" codeing and debuging "
+    if " organizing committee" in msg:
+        return "Principal : D. M Barathi \n Vice Principal & HOD (IT) Professor. D Durai Kumar.\n HOD (CSE & CS)Mrs. SI Santhanalakshmi \n "
+    if "Student Co-ordinators  " in msg:
+        return" Usharani S.\n Aravind Krishna PM.\n Santhosh Kumar J.\n  Sarathy K.\n  Mohan Raj S.\n Nehanth R.\n  David Niglin S I. \n "
+    if "   Who is the Convener of INFEX'26?" in msg:
+        return" : Mrs. SI Santhanalakshmi, HOD (CSE & CS). "
+    if " staff coordinator for the event.  " in msg:
+        return" Mrs. S Vennila, \n Mr. P Jayasooriya \n, Mr. S Thirumal,\n  Mrs. M Jothika or Mrs. GV Varshini.\n "
+    if " What is the main theme of INFEX'26? " in msg:
+        return"  The convergence of technology, innovation, and engineering excellence. "
+    if " who is aravind mani " in msg:
+        return"Mr. Aravindh Mani currently serves as the SAP Delivery Head for APAC and the Middle East at ELIXIR Global- a company driving Al-powered strategy, digital transformation, and intelligent outsourcing. In this role, he leads large-scale SAP delivery programs, bridging the gap between complex legacy systems and future-ready digital enterprises.His focus is on high-impact initiatives SAP S/4HANA transitions, cloud-first strategies, and Applied Al integration with a clear mission: to move beyond go-live and deliver measurable, sustainable business outcomes."
+    if "is this event fun?" in msg:
+        return" yes, it will be fun and exciting."
+    if "hi  " in msg:
+        return" Hello! Welcome to Infinex’26 👋 "
+    if "  Will food be provided? " in msg:
+        return" Yes, food will be provided. "
+    if " Is certificate useful? " in msg:
+        return" Yes, it helps in your resume. "
+
+
 
     # Default fallback
     fallbacks = [
