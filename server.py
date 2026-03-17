@@ -29,171 +29,138 @@ def chat(data: Message):
     reply = get_reply(msg)
     return {"reply": reply}
 
-# ── Smart reply logic
 def get_reply(msg: str) -> str:
+    msg = msg.lower().strip()
     now = datetime.now()
 
-    # Time
-    if "current time " == msg or "now" in msg:
-        return f"🕐 The current time is **{now.strftime('%h:%M:%S %p')}**."
+    # ── TIME
+    if "time" in msg or "now" in msg:
+        return f"🕐 The current time is {now.strftime('%I:%M:%S %p')}."
 
-    # Date
-    if any(w in msg for w in ["date", "today", "what day", "day is it"]):
-        return f"📅 Today is **{now.strftime('%A, %B %d, %Y')}**."
+    # ── DATE
+    elif any(w in msg for w in ["date", "today", "day"]):
+        return f"📅 Today is {now.strftime('%A, %B %d, %Y')}."
 
-    # Day of week
-    if "day of the week" in msg or "weekday" in msg:
-        return f"Today is **{now.strftime('%A')}**."
+    # ── GREETINGS
+    elif any(w in msg for w in ["hello", "hi", "hey"]):
+        return random.choice([
+            "Hello! 👋 Welcome to Infinex’26",
+            "Hi there! How can I help you?",
+            "Hey! Ask me anything 🤖"
+        ])
 
-    # Greetings
-    if any(w in msg for w in ["hello", "hii", "hey", "howdy", "greetings"]):
-        greets = [
-            "Hello there! 👋 How can I help you today?",
-            "Hi! Great to see you. What's on your mind?",
-            "Hey! I'm InfinexChat — ask me anything! 🤖"
-        ]
-        return random.choice(greets)
+    # ── BASIC CHAT
+    elif "how are you" in msg:
+        return "I'm running perfectly ⚡ What about you?"
 
-    # How are you
-    if any(w in msg for w in ["how are you", "how r u", "you okay", "you good"]):
-        return "I'm running perfectly — all systems online! ⚡ How about you?"
+    elif "your name" in msg:
+        return "I'm InfinexChat 🤖"
 
-    # Name / identity
-    if any(w in msg for w in ["your name", "who are you", "what are you", "what is your name"]):
-        return "I'm **InfinexChat** 🤖 — your AI-powered assistant, connected to a live server. Ask me about time, date, facts, jokes and more!"
+    elif "help" in msg:
+        return "Ask me about time, date, events, jokes, or Infinex’26."
 
-    # What can you do
-    if any(w in msg for w in ["what can you do", "help", "capabilities", "features"]):
-        return (
-            "Here's what I can do:\n"
-            "• 🕐 Tell you the **current time**\n"
-            "• 📅 Give you today's **date**\n"
-            "• 😄 Share **jokes** and fun facts\n"
-            "• 🤖 Chat about anything!\n\n"
-            "Just type your message and I'll respond live from the server."
-        )
-    if "tell about infinex" in msg:
-        return "It is symposium of 2026 Cse and cyber "
-    # Server status
-    if any(w in msg for w in ["server", "status", "online", "server status", "api"]):
-        return f"✅ Server is **online** and healthy.\nCurrent server time: `{now.strftime('%H:%M:%S')}`"
-
-    # Jokes
-    if any(w in msg for w in ["joke", "funny", "laugh", "humor"]):
-        jokes = [
-            "Why do robots never panic? Because they always **keep their circuits calm**! ⚡",
-            "Why did the robot go on a diet? Because it had too many **bytes**! 🤖",
-            "I told my computer I needed a break. Now it won't stop sending me **Kit-Kat ads**. 😄",
-            "Why don't robots eat clocks? Because it's too **time-consuming**! ⏰",
-            "What do you call a robot that always tells the truth? **A bot that can't lie**-cense! 🤖",
-        ]
-        return random.choice(jokes)
-
-    # Robot / interesting facts
-    if any(w in msg for w in ["fact", "interesting", "robot fact", "did you know"]):
-        facts = [
-            "🤖 **Fun fact:** The word 'robot' comes from the Czech word *robota*, meaning forced labor — first used in a 1920 play!",
-            "⚡ **Fun fact:** The first programmable computer weighed over **27 tons** and filled an entire room!",
-            "🌐 **Fun fact:** There are more than **5 billion** internet users worldwide as of 2024.",
-            "💡 **Fun fact:** The first AI chatbot, ELIZA, was created in **1966** at MIT.",
-            "🔢 **Fun fact:** A modern smartphone has more computing power than all of NASA's computers in 1969 combined!",
-        ]
-        return random.choice(facts)
-
-    # Goodbye
-    if any(w in msg for w in ["bye", "goodbye", "see you", "ciao", "later", "exit"]):
-        return "Goodbye! 👋 Come back anytime — I'm always here!"
-
-    # Thanks
-    if any(w in msg for w in ["thank", "thanks", "appreciate"]):
-        return "You're welcome! 😊 Let me know if there's anything else I can help with."
-        
-    if "hari" in msg:
-        return "Welcome to harii"
-
-    # Weather (graceful not-supported)
-    if "weather" in msg:
-        return "🌤️ I don't have live weather data yet, but you can check **weather.com** for your location!"
-
-    if "college" in msg and "infinex" in msg:
+    # ── INFINEX INFO
+    elif "college" in msg and "infinex" in msg:
         return "Ganadipathy Tulsi's Jain Engineering College."
 
     elif "department" in msg:
-        return "The Department of Computer Science and cyber security."
+        return "Department of Computer Science and Cyber Security."
 
     elif "when" in msg and "infinex" in msg:
         return "On 18th March."
 
-    elif "time" in msg and "start" in msg:
+    elif "start time" in msg:
         return "At 9:00 AM."
 
-    elif "where" in msg and "infinex" in msg:
+    elif "where" in msg:
         return "At the Mahaveer Block of the college."
 
     elif "technical events" in msg:
         return """⚡ STYLESHEET SHOWDOWN
-        ⚡ WHITEPAPER PROTOCOL
-        ⚡ CLOCK SPEED QUIZ
-        ⚡ GRAPHIC GLITCH
-        ⚡ CODE-BLOODED"""
+⚡ WHITEPAPER PROTOCOL
+⚡ CLOCK SPEED QUIZ
+⚡ GRAPHIC GLITCH
+⚡ CODE-BLOODED"""
 
+    # ── EVENTS
     elif "stylesheet showdown" in msg:
-        return "It's a web development event."
+        return "Web development event."
 
     elif "whitepaper protocol" in msg:
-        return "It's a paper presentation."
+        return "Paper presentation."
 
     elif "graphic glitch" in msg:
-        return "It's a poster designing event."
+        return "Poster designing."
 
     elif "clock speed" in msg:
-        return "It's a quiz competition."
+        return "Quiz competition."
 
-    elif "code blooded" in msg or "code-blooded" in msg:
-        return "Coding and debugging competition."
+    elif "code blooded" in msg:
+        return "Coding and debugging."
 
-    elif "organizing committee" in msg or "organizing committee" in msg:
+    # ── TEAM
+    elif "organizing committee" in msg:
         return """Principal: D. M Barathi
-        Vice Principal & HOD (IT): Prof. D Durai Kumar
-        HOD (CSE & CS): Mrs. SI Santhanalakshmi"""
+Vice Principal: Prof. D Durai Kumar
+HOD: Mrs. SI Santhanalakshmi"""
 
-    elif "student coordinator" in msg or "student coordinates" in msg or "student coordinates" in msg:
-        return """Usharani S.
-    Aravind Krishna PM
-    Santhosh Kumar J
-    Sarathy K
-    Mohan Raj S
-    Nehanth R
-    David Niglin S I"""
+    elif "student coordinator" in msg:
+        return """Usharani S
+Aravind Krishna PM
+Santhosh Kumar J
+Sarathy K
+Mohan Raj S
+Nehanth R
+David Niglin S I"""
+
+    elif "staff coordinator" in msg:
+        return """Mrs. S Vennila
+Mr. P Jayasooriya
+Mr. S Thirumal
+Mrs. M Jothika
+Mrs. GV Varshini"""
 
     elif "convener" in msg:
-        return "Mrs. SI Santhanalakshmi, HOD (CSE & CS)."
+        return "Mrs. SI Santhanalakshmi."
 
-    elif "staff coordinator" in msg and "staff" in msg:
-        return """Mrs. S Vennila
-    Mr. P Jayasooriya
-    Mr. S Thirumal
-    Mrs. M Jothika
-    Mrs. GV Varshini"""
-
+    # ── EXTRA
     elif "theme" in msg:
-        return "The convergence of technology, innovation, and engineering excellence."
+        return "Technology, innovation, and engineering excellence."
 
-    elif "aravind mani" in msg or "arvind mani" in msg:
-        return "Mr. Aravindh Mani is SAP Delivery Head for APAC & Middle East at ELIXIR Global, leading SAP S/4HANA, cloud, and AI-driven transformations."
+    elif "aravind mani" in msg:
+        return "SAP Delivery Head at ELIXIR Global."
 
     elif "fun" in msg:
-        return "Yes, it will be fun and exciting!"
-
-    elif "hii" in msg or "hello" in msg:
-        return "Hello! Welcome to Infinex’26 👋"
+        return "Yes 😄 It will be exciting!"
 
     elif "food" in msg:
         return "Yes, food will be provided."
 
     elif "certificate" in msg:
-        return "Yes, it helps in your resume."
+        return "Yes, useful for your resume."
 
+    # ── JOKES
+    elif "joke" in msg:
+        return random.choice([
+            "Why do robots panic? They don't 😄",
+            "Too many bytes made the robot fat 🤖",
+            "My PC said take a break… now ads everywhere 😂"
+        ])
+
+    # ── THANKS / BYE
+    elif "thank" in msg:
+        return "You're welcome 😊"
+
+    elif "bye" in msg:
+        return "Goodbye 👋 See you again!"
+
+    # ── DEFAULT
+    else:
+        return random.choice([
+            "I didn't understand 🤔 Try asking about Infinex’26.",
+            "Ask me about events, time, or details!",
+            "Try 'technical events' or 'schedule' 😊"
+        
     else:
         return "Sorry, I didn't understand. Please ask about Infinex’26."
     # Default fallback
