@@ -157,7 +157,7 @@ def get_reply(msg: str) -> str:
         Vice Principal & HOD (IT): Prof. D Durai Kumar
         HOD (CSE & CS): Mrs. SI Santhanalakshmi"""
 
-    elif "student coordinator" in msg or "student coordinates" in msg or "student coordinates":
+    elif "student coordinator" in msg or "student coordinates" in msg or "student coordinates" in msg:
         return """Usharani S.
     Aravind Krishna PM
     Santhosh Kumar J
