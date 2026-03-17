@@ -72,7 +72,8 @@ def get_reply(msg: str) -> str:
             "• 🤖 Chat about anything!\n\n"
             "Just type your message and I'll respond live from the server."
         )
-
+    if "tell about infinex" in msg:
+        return "It is symposium of 2026 Cse and cyber "
     # Server status
     if any(w in msg for w in ["server", "status", "online", "server status", "api"]):
         return f"✅ Server is **online** and healthy.\nCurrent server time: `{now.strftime('%H:%M:%S')}`"
@@ -106,6 +107,9 @@ def get_reply(msg: str) -> str:
     # Thanks
     if any(w in msg for w in ["thank", "thanks", "thx", "ty", "appreciate"]):
         return "You're welcome! 😊 Let me know if there's anything else I can help with."
+        
+    if "hari" in msg:
+        return "Welcome to harii"
 
     # Weather (graceful not-supported)
     if "weather" in msg:
@@ -118,5 +122,4 @@ def get_reply(msg: str) -> str:
         "That's a tricky one! Try asking about **time**, **date**, or type **'help'** to see what I can do.",
     ]
     return random.choice(fallbacks)
-    if "hari" in msg:
-        return "Welcome to harii"
+    
