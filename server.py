@@ -34,7 +34,7 @@ def get_reply(msg: str) -> str:
     now = datetime.now()
 
     # Time
-    if any(w in msg for w in ["time", "what time", "current time", "clock"]):
+    if "current time " == msg or "now" in msg:
         return f"🕐 The current time is **{now.strftime('%h:%M:%S %p')}**."
 
     # Date
@@ -46,7 +46,7 @@ def get_reply(msg: str) -> str:
         return f"Today is **{now.strftime('%A')}**."
 
     # Greetings
-    if any(w in msg for w in ["hello", "hi", "hey", "howdy", "greetings"]):
+    if any(w in msg for w in ["hello", "hii", "hey", "howdy", "greetings"]):
         greets = [
             "Hello there! 👋 How can I help you today?",
             "Hi! Great to see you. What's on your mind?",
@@ -105,7 +105,7 @@ def get_reply(msg: str) -> str:
         return "Goodbye! 👋 Come back anytime — I'm always here!"
 
     # Thanks
-    if any(w in msg for w in ["thank", "thanks", "thx", "ty", "appreciate"]):
+    if any(w in msg for w in ["thank", "thanks", "appreciate"]):
         return "You're welcome! 😊 Let me know if there's anything else I can help with."
         
     if "hari" in msg:
